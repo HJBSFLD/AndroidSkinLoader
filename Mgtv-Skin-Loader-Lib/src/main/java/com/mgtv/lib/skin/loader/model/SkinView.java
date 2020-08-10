@@ -9,13 +9,12 @@ import java.util.List;
  * Phone 18974450920
  * Mail lipeng@mgtv.com
  */
-public class SkinView {
+public class SkinView extends SkinHold {
     private View view;
-    private List<SkinAttr> attrs;
 
-    public SkinView(View view, List<SkinAttr> attrs) {
+    public SkinView(View view, List<SkinAttr> attrs, String tag) {
+        super(attrs, tag);
         this.view = view;
-        this.attrs = attrs;
     }
 
     public View getView() {
@@ -24,14 +23,6 @@ public class SkinView {
 
     public void setView(View view) {
         this.view = view;
-    }
-
-    public List<SkinAttr> getAttrs() {
-        return attrs;
-    }
-
-    public void setAttrs(List<SkinAttr> attrs) {
-        this.attrs = attrs;
     }
 
     public void apply() {

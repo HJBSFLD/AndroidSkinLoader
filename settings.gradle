@@ -1,0 +1,3 @@
+include ':Mgtv-Skin-Loader-Lib'
+include ':app'
+rootProject.name = "MGTV-SKIN-LOADER"

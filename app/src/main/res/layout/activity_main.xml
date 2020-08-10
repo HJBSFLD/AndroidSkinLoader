@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:skin="http://schemas.android.com/android/skin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#554455"
+    skin:enable="true"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/test_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        android:textColor="@color/text_color"
+        android:textSize="30sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        skin:enable="true" />
+
+
+    <LinearLayout
+        android:id="@+id/test_2"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/back_color"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/test_1"
+        skin:enable="true" />
+
+    <ImageView
+        android:id="@+id/test_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/logo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/test_2"
+        skin:enable="true" />
+
+    <Button
+        android:id="@+id/test_4"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:background="#99DDEE"
+        android:focusable="true"
+        android:text="插件换肤"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/test_5">
+
+        <requestFocus />
+    </Button>
+
+    <Button
+        android:id="@+id/test_5"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:background="#99DDEE"
+        android:focusable="true"
+        android:text="应用内换肤"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toRightOf="@+id/test_4"
+        app:layout_constraintRight_toLeftOf="@id/test_6" />
+
+    <Button
+        android:id="@+id/test_6"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:background="#99DDEE"
+        android:focusable="true"
+        android:text="跳转"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/test_4"
+        app:layout_constraintRight_toRightOf="parent" />
+</android.support.constraint.ConstraintLayout>

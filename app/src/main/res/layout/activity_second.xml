@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:skin="http://schemas.android.com/android/skin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/second_wrap"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/back_color"
+    skin:enable="true">
+
+    <ImageView
+        android:id="@+id/second_1"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:src="@drawable/img_x"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        skin:enable="true" />
+
+    <TextView
+        android:id="@+id/second_2"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        android:text="测试测试"
+        android:textColor="@color/text_color_1"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/second_3"
+        app:layout_constraintTop_toBottomOf="@id/second_1"
+        skin:enable="true" />
+
+    <TextView
+        android:id="@+id/second_3"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:text="测试测试"
+        android:textColor="@color/text_color_2"
+        app:layout_constraintLeft_toRightOf="@id/second_2"
+        app:layout_constraintRight_toLeftOf="@id/second_4"
+        app:layout_constraintTop_toTopOf="@id/second_2"
+        skin:enable="true" />
+
+    <TextView
+        android:id="@+id/second_4"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:text="测试测试"
+        android:textColor="@color/text_color_3"
+        app:layout_constraintLeft_toRightOf="@id/second_3"
+        app:layout_constraintRight_toLeftOf="@id/second_5"
+        app:layout_constraintTop_toTopOf="@id/second_2"
+        skin:enable="true" />
+
+    <TextView
+        android:id="@+id/second_5"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:text="测试测试"
+        android:textColor="@color/text_color_4"
+        app:layout_constraintLeft_toRightOf="@id/second_4"
+        app:layout_constraintRight_toLeftOf="@+id/second_6"
+        app:layout_constraintTop_toTopOf="@id/second_2"
+        skin:enable="true" />
+
+    <TextView
+        android:id="@+id/second_6"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:text="测试测试"
+        app:layout_constraintLeft_toRightOf="@id/second_5"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/second_2"
+        skin:enable="true" />
+
+
+    <ImageView
+        android:id="@+id/second_7"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/img"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/second_8"
+        app:layout_constraintTop_toBottomOf="@id/second_6"
+        skin:enable="true" />
+
+    <ImageView
+        android:id="@+id/second_8"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/img_1"
+        app:layout_constraintLeft_toRightOf="@id/second_7"
+        app:layout_constraintRight_toLeftOf="@id/second_9"
+        app:layout_constraintTop_toTopOf="@id/second_7"
+        skin:enable="true" />
+
+    <ImageView
+        android:id="@+id/second_9"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/img_2"
+        app:layout_constraintLeft_toRightOf="@id/second_8"
+        app:layout_constraintRight_toLeftOf="@id/second_10"
+        app:layout_constraintTop_toTopOf="@id/second_7"
+        skin:enable="true" />
+
+    <ImageView
+        android:id="@+id/second_10"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/img_3"
+        app:layout_constraintLeft_toRightOf="@id/second_9"
+        app:layout_constraintRight_toLeftOf="@+id/second_11"
+        app:layout_constraintTop_toTopOf="@id/second_7"
+        skin:enable="true" />
+
+    <ImageView
+        android:id="@+id/second_11"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/img_4"
+        app:layout_constraintLeft_toRightOf="@id/second_10"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/second_7"
+        skin:enable="true" />
+
+    <Button
+        android:id="@+id/second_12"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:background="#99DDEE"
+        android:focusable="true"
+        android:text="换肤"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/second_13">
+
+        <requestFocus />
+    </Button>
+
+    <Button
+        android:id="@+id/second_13"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:background="#99DDEE"
+        android:focusable="true"
+        android:text="还原"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/second_12"
+        app:layout_constraintRight_toRightOf="parent">
+
+    </Button>
+</android.support.constraint.ConstraintLayout>

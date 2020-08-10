@@ -12,7 +12,7 @@ import com.mgtv.lib.skin.loader.resource.ResourceManager;
  * Phone 18974450920
  * Mail lipeng@mgtv.com
  */
-public class TextColorAttr extends SkinAttr {
+public class TextColorAttr extends SkinAttr<View> {
     @Override
     public void apply(View view) {
         if (view instanceof TextView) {

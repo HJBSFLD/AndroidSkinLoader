@@ -20,8 +20,8 @@ import java.util.List;
  * Mail lipeng@mgtv.com
  */
 public class AttrHelper {
-    public static SkinAttr createSkinAttr(String attrType, int attrId, String attrName, String typeName) {
-        SkinAttr mSkinAttr = null;
+    public static SkinAttr<View> createSkinAttr(String attrType, int attrId, String attrName, String typeName) {
+        SkinAttr<View> mSkinAttr = null;
         switch (attrType) {
             case SkinAttrType
                     .BACKGROUND:
@@ -64,13 +64,13 @@ public class AttrHelper {
     }
 
     public static SkinView parseToSkinView(Context context, View view, String tag, @SkinAttrType String attrType, int attrId) {
-        List<SkinAttr> skinAttrs = new ArrayList<>();
+        List<SkinAttr<View>> skinAttrs = new ArrayList<>();
         String entryName = context.getResources().getResourceEntryName(attrId);
         String typeName = context.getResources().getResourceTypeName(attrId);
         if (TextUtils.isEmpty(entryName) || TextUtils.isEmpty(typeName)) {
             return null;
         }
-        SkinAttr skinAttr = createSkinAttr(attrType, attrId, entryName, typeName);
+        SkinAttr<View> skinAttr = createSkinAttr(attrType, attrId, entryName, typeName);
         if (skinAttr != null) {
             skinAttrs.add(skinAttr);
             return new SkinView(view, skinAttrs, tag);
@@ -83,7 +83,7 @@ public class AttrHelper {
     }
 
     public static SkinView parseToSkinView(Context context, View view, String tag, List<DynamicAttr> dAttrs) {
-        List<SkinAttr> skinAttrs = new ArrayList<>();
+        List<SkinAttr<View>> skinAttrs = new ArrayList<>();
         for (DynamicAttr dAttr : dAttrs) {
             int id = dAttr.getAttrId();
             String entryName = context.getResources().getResourceEntryName(id);
@@ -91,7 +91,7 @@ public class AttrHelper {
             if (TextUtils.isEmpty(entryName) || TextUtils.isEmpty(typeName)) {
                 return null;
             }
-            SkinAttr skinAttr = createSkinAttr(dAttr.getAttrType(), id, entryName, typeName);
+            SkinAttr<View> skinAttr = createSkinAttr(dAttr.getAttrType(), id, entryName, typeName);
             if (skinAttr != null) {
                 skinAttrs.add(skinAttr);
             }

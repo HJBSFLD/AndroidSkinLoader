@@ -29,7 +29,7 @@ import java.util.List;
 public class MSkinInflaterFactory implements LayoutInflater.Factory {
     private static final String STRING_AT = "@";
     private List<SkinView> mSkinItems = new ArrayList<SkinView>();
-    private DynamicSkinViewManager dynamicSkinViewManager;
+    private DynamicSkinViewManager<SkinView, View> dynamicSkinViewManager;
 
 
     @Nullable
@@ -62,17 +62,33 @@ public class MSkinInflaterFactory implements LayoutInflater.Factory {
     }
 
     public void dynamicAddSkinView(Context context, View view, List<DynamicAttr> dAttrs) {
+        dynamicAddSkinView(context, view, "", dAttrs);
+    }
+
+    public void dynamicAddSkinView(Context context, View view, String tag, List<DynamicAttr> dAttrs) {
         if (dynamicSkinViewManager == null) {
-            dynamicSkinViewManager = new DynamicSkinViewManager();
+            dynamicSkinViewManager = new DynamicSkinViewManager<>();
         }
-        dynamicSkinViewManager.dynamicAddSkinView(context, view, dAttrs);
+        SkinView v = AttrHelper.parseToSkinView(context, view, tag, dAttrs);
+        if (v == null) {
+            return;
+        }
+        dynamicSkinViewManager.dynamicAddSkinView(v);
     }
 
     public void dynamicAddSkinView(Context context, View view, @SkinAttrType String attrType, int attrId) {
+
+    }
+
+    public void dynamicAddSkinView(Context context, View view, String tag, @SkinAttrType String attrType, int attrId) {
         if (dynamicSkinViewManager == null) {
-            dynamicSkinViewManager = new DynamicSkinViewManager();
+            dynamicSkinViewManager = new DynamicSkinViewManager<>();
         }
-        dynamicSkinViewManager.dynamicAddSkinView(context, view, attrType, attrId);
+        SkinView v = AttrHelper.parseToSkinView(context, view, tag, attrType, attrId);
+        if (v == null) {
+            return;
+        }
+        dynamicSkinViewManager.dynamicAddSkinView(v);
     }
 
 
@@ -116,7 +132,7 @@ public class MSkinInflaterFactory implements LayoutInflater.Factory {
 
 
     private void parseSkinAttr(Context context, AttributeSet attrs, View v) {
-        List<SkinAttr> skinAttrs = new ArrayList<>();
+        List<SkinAttr<View>> skinAttrs = new ArrayList<>();
         for (int i = 0; i < attrs.getAttributeCount(); i++) {
             String attrName = attrs.getAttributeName(i);
             String attrValue = attrs.getAttributeValue(i);
@@ -129,7 +145,7 @@ public class MSkinInflaterFactory implements LayoutInflater.Factory {
                     String entryName = context.getResources().getResourceEntryName(id);
                     String typeName = context.getResources().getResourceTypeName(id);
                     Log.d(Constants.TAG, "typeName = " + typeName + " entryName=" + entryName);
-                    SkinAttr mSkinAttr = AttrHelper.createSkinAttr(attrName, id, entryName, typeName);
+                    SkinAttr<View> mSkinAttr = AttrHelper.createSkinAttr(attrName, id, entryName, typeName);
                     if (mSkinAttr != null) {
                         skinAttrs.add(mSkinAttr);
                     }
@@ -139,7 +155,7 @@ public class MSkinInflaterFactory implements LayoutInflater.Factory {
             }
         }
         if (skinAttrs.size() > 0) {
-            SkinView skinView = new SkinView(v, skinAttrs);
+            SkinView skinView = new SkinView(v, skinAttrs, "");
             mSkinItems.add(skinView);
             if (MSkinLoader.getInstance().getSkinMode() != SkinMode.MODE_DEFAULT) {
                 skinView.apply();

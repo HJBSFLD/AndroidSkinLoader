@@ -8,7 +8,7 @@ import android.view.View;
  * Phone 18974450920
  * Mail lipeng@mgtv.com
  */
-public abstract class SkinAttr {
+public abstract class SkinAttr<T> {
     /**
      * attr类型, background、textSize、textColor
      */
@@ -58,7 +58,7 @@ public abstract class SkinAttr {
         this.attrValueTypeName = attrValueTypeName;
     }
 
-    public abstract void apply(View view);
+    public abstract void apply(T view);
 
     @Override
     public String toString() {

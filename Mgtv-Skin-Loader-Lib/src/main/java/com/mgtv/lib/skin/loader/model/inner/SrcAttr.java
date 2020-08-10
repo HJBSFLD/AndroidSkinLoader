@@ -11,7 +11,7 @@ import com.mgtv.lib.skin.loader.model.SkinAttr;
  * Phone 18974450920
  * Mail lipeng@mgtv.com
  */
-public class SrcAttr extends SkinAttr {
+public class SrcAttr extends SkinAttr<View> {
     @Override
     public void apply(View view) {
         if (view instanceof ImageView) {

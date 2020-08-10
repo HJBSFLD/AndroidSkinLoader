@@ -9,11 +9,24 @@ import java.util.List;
  * Phone 18974450920
  * Mail lipeng@mgtv.com
  */
-public class SkinView extends SkinHold {
+public class SkinView {
     private View view;
+    private List<SkinAttr> attrs;
 
-    public SkinView(View view, List<SkinAttr> attrs, String tag) {
-        super(attrs, tag);
+    public SkinView(View view, List<SkinAttr> attrs) {
+        this.attrs = attrs;
+        this.view = view;
+    }
+
+    public List<SkinAttr> getAttrs() {
+        return attrs;
+    }
+
+    public void setAttrs(List<SkinAttr> attrs) {
+        this.attrs = attrs;
+    }
+
+    public void setView(View view) {
         this.view = view;
     }
 
@@ -21,8 +34,12 @@ public class SkinView extends SkinHold {
         return view;
     }
 
-    public void setView(View view) {
-        this.view = view;
+    public void clean() {
+        if (attrs == null || attrs.size() == 0) {
+            return;
+        }
+        attrs.clear();
+        attrs = null;
     }
 
     public void apply() {
@@ -34,11 +51,4 @@ public class SkinView extends SkinHold {
         }
     }
 
-    public void clean() {
-        if (attrs == null || attrs.size() == 0) {
-            return;
-        }
-        attrs.clear();
-        attrs = null;
-    }
 }

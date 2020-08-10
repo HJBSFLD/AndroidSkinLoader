@@ -1,5 +1,6 @@
 package com.mgtv.lib.skin.loader.model.inner;
 
+import android.os.Build;
 import android.view.View;
 
 import com.mgtv.lib.skin.loader.MSkinLoader;
@@ -20,7 +21,11 @@ public class BackgroundAttr extends SkinAttr {
                 break;
             case ResourceManager.DRAWABLE_FOLDER:
             case ResourceManager.MIPMAP_FOLDER:
-                view.setBackground(MSkinLoader.getInstance().getResourceManager().getDrawable(this));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    view.setBackground(MSkinLoader.getInstance().getResourceManager().getDrawable(this));
+                } else {
+                    view.setBackgroundDrawable(MSkinLoader.getInstance().getResourceManager().getDrawable(this));
+                }
                 break;
         }
     }

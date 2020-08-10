@@ -29,7 +29,7 @@ import java.util.List;
 public class MSkinInflaterFactory2 implements LayoutInflater.Factory2 {
     private static final String STRING_AT = "@";
     private List<SkinView> mSkinItems = new ArrayList<SkinView>();
-    private DynamicSkinViewManager<SkinView> dynamicSkinViewManager;
+    private DynamicSkinViewManager dynamicSkinViewManager;
     private AppCompatDelegate mDelegate;
 
     public MSkinInflaterFactory2(AppCompatDelegate delegate) {
@@ -56,34 +56,19 @@ public class MSkinInflaterFactory2 implements LayoutInflater.Factory2 {
     }
 
     public void dynamicAddSkinView(Context context, View view, List<DynamicAttr> dAttrs) {
-        dynamicAddSkinView(context, view, "", dAttrs);
-    }
-
-    public void dynamicAddSkinView(Context context, View view, String tag, List<DynamicAttr> dAttrs) {
         if (dynamicSkinViewManager == null) {
-            dynamicSkinViewManager = new DynamicSkinViewManager<>();
+            dynamicSkinViewManager = new DynamicSkinViewManager();
         }
-        SkinView v = AttrHelper.parseToSkinView(context, view, tag, dAttrs);
-        if (v == null) {
-            return;
-        }
-        dynamicSkinViewManager.dynamicAddSkinView(v);
+        dynamicSkinViewManager.dynamicAddSkinView(context, view, dAttrs);
     }
 
     public void dynamicAddSkinView(Context context, View view, @SkinAttrType String attrType, int attrId) {
-        dynamicAddSkinView(context, view, "", attrType, attrId);
+        if (dynamicSkinViewManager == null) {
+            dynamicSkinViewManager = new DynamicSkinViewManager();
+        }
+        dynamicSkinViewManager.dynamicAddSkinView(context, view, attrType, attrId);
     }
 
-    public void dynamicAddSkinView(Context context, View view, String tag, @SkinAttrType String attrType, int attrId) {
-        if (dynamicSkinViewManager == null) {
-            dynamicSkinViewManager = new DynamicSkinViewManager<>();
-        }
-        SkinView v = AttrHelper.parseToSkinView(context, view, tag, attrType, attrId);
-        if (v == null) {
-            return;
-        }
-        dynamicSkinViewManager.dynamicAddSkinView(v);
-    }
 
     public void clean() {
         if (mSkinItems != null && mSkinItems.size() != 0) {
@@ -152,7 +137,7 @@ public class MSkinInflaterFactory2 implements LayoutInflater.Factory2 {
             }
         }
         if (skinAttrs.size() > 0) {
-            SkinView skinView = new SkinView(v, skinAttrs, "");
+            SkinView skinView = new SkinView(v, skinAttrs);
             mSkinItems.add(skinView);
             if (MSkinLoader.getInstance().getSkinMode() != SkinMode.MODE_DEFAULT) {
                 skinView.apply();

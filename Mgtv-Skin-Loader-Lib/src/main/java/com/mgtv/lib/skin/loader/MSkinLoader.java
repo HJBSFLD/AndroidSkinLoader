@@ -34,10 +34,10 @@ import static com.mgtv.lib.skin.loader.constant.Constants.TAG;
 public class MSkinLoader {
     private Application mContext;
     private boolean isInit = false;
-    private ResourceManager mResourceManager;//换肤的资源管理器
+    private volatile ResourceManager mResourceManager;//换肤的资源管理器
     private SkinSPHelper mSp;
     private int mode;
-    private String mSuffix;
+    private volatile String mSuffix;
     private String mPluginPath;
     private String mPluginPackage;
     private List<ISkinChangeListener> skinObservers;

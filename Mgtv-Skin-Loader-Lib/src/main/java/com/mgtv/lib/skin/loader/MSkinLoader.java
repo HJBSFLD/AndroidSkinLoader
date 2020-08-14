@@ -19,6 +19,7 @@ import com.mgtv.lib.skin.loader.utils.SkinSPHelper;
 import com.mgtv.lib.skin.loader.thread.DefaultPoolExecutor;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,7 @@ import static com.mgtv.lib.skin.loader.constant.Constants.TAG;
  */
 public class MSkinLoader {
     private Application mContext;
-    private boolean isInit = false;
+    private volatile boolean isInit = false;
     private volatile ResourceManager mResourceManager;//换肤的资源管理器
     private SkinSPHelper mSp;
     private int mode;

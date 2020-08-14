@@ -44,7 +44,7 @@ public class ResourceManager {
         }
         if (MSkinLoader.getInstance().getSkinMode() == SkinMode.MODE_DEFAULT) {
             try {
-                return mResources.getDrawable(attr.getAttrId());
+                return mContext.getResources().getDrawable(attr.getAttrId());
             } catch (Resources.NotFoundException e) {
                 e.printStackTrace();
             }
@@ -72,6 +72,40 @@ public class ResourceManager {
         return null;
     }
 
+    /**
+     * 根据资源ID搜索图片资源
+     */
+    public Drawable getDrawable(int resId) {
+        if (MSkinLoader.getInstance().getSkinMode() == SkinMode.MODE_DEFAULT) {
+            return mContext.getResources().getDrawable(resId);
+        } else {
+            String resName = mContext.getResources().getResourceEntryName(resId);
+            if (TextUtils.isEmpty(resName)) {
+                return null;
+            }
+            String sName = appendSuffix(resName);
+            Drawable drawable = null;
+            drawable = findDrawableInResource(sName, DRAWABLE_FOLDER, mPluginPackage);
+            if (drawable == null) {
+                //如果在drawable文件夹中没找到 就在mipmap中找一次
+                drawable = findDrawableInResource(sName, MIPMAP_FOLDER, mPluginPackage);
+            }
+            if (drawable == null) {
+                //如果在mipmap文件夹中没找到 就在颜色中找一次
+                drawable = findDrawableInResource(sName, COLOR_FOLDER, mPluginPackage);
+            }
+            if (drawable == null) {
+                //兜底 都没找到就使用默认
+                try {
+                    return mContext.getResources().getDrawable(resId);
+                } catch (Resources.NotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+            return drawable;
+        }
+    }
+
     public int getColor(SkinAttr attr) {
         if (attr == null) {
             return -1;
@@ -96,7 +130,31 @@ public class ResourceManager {
                 //如果获取失败 则使用原本颜色
             }
         }
-        return -1;
+        return 0;
+    }
+
+    public int getColor(int resId) {
+        if (MSkinLoader.getInstance().getSkinMode() == SkinMode.MODE_DEFAULT) {
+            return mContext.getResources().getColor(resId);
+        } else {
+            String resName = mContext.getResources().getResourceEntryName(resId);
+            String name = appendSuffix(resName);
+            int colorId = mResources.getIdentifier(name, COLOR_FOLDER, mPluginPackage);
+            try {
+                if (colorId == 0) {
+                    //如果获取失败 则使用原本颜色
+                    int realId = mContext.getResources().getIdentifier(resName, COLOR_FOLDER, mContext.getPackageName());
+                    if (realId != 0) {
+                        return mContext.getResources().getColor(realId);
+                    }
+                } else {
+                    return mResources.getColor(colorId);
+                }
+            } catch (Resources.NotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
     }
 
     /**
@@ -127,6 +185,38 @@ public class ResourceManager {
         }
         //以上都没有找到 从颜色中再找一次
         int color = getColor(attr);
+        if (color > 0) {
+            int[][] states = new int[1][1];
+            return new ColorStateList(states, new int[]{color});
+        }
+        return null;
+    }
+
+    /**
+     * 根据资源名搜索颜色集合
+     */
+    public ColorStateList getColorStateList(int resId) {
+        if (MSkinLoader.getInstance().getSkinMode() == SkinMode.MODE_DEFAULT) {
+            return mContext.getResources().getColorStateList(resId);
+        } else {
+            String resName = mContext.getResources().getResourceEntryName(resId);
+            String name = appendSuffix(resName);
+            int colorId = mResources.getIdentifier(name, COLOR_FOLDER, mPluginPackage);
+            try {
+                if (colorId == 0) {
+                    int realId = mContext.getResources().getIdentifier(resName, COLOR_FOLDER, mContext.getPackageName());
+                    if (realId != 0) {
+                        return mContext.getResources().getColorStateList(realId);
+                    }
+                } else {
+                    return mResources.getColorStateList(colorId);
+                }
+            } catch (Resources.NotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        //以上都没有找到 从颜色中再找一次
+        int color = getColor(resId);
         if (color > 0) {
             int[][] states = new int[1][1];
             return new ColorStateList(states, new int[]{color});

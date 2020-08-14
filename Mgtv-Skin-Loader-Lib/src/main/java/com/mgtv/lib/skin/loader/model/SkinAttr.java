@@ -1,7 +1,6 @@
 package com.mgtv.lib.skin.loader.model;
 
 
-import android.view.View;
 
 /**
  * author  Li Peng on 2020/8/6.

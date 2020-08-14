@@ -59,13 +59,14 @@ public class MSkinLoader {
         if (isInit) {
             return;
         }
+        isInit = true;
         Log.d(TAG, "M SKIN init start");
         mSp = new SkinSPHelper(context);
         preparePlugin();
-        isInit = true;
     }
 
     public void clear() {
+        Log.d(TAG, "M SKIN clear");
         mResourceManager = null;
         mSp = null;
         mSuffix = null;
@@ -198,7 +199,7 @@ public class MSkinLoader {
         final String skinPluginPath = mSp.getPluginPath();
         final String skinPluginPkg = mSp.getPluginPackage();
         final String suffix = mSp.getAttrSuffix();
-        Log.d(TAG, "M SKIN load plugin params Path=" + skinPluginPath + " pkg=" + skinPluginPkg + " suffix" + suffix);
+        Log.d(TAG, "M SKIN prepare plugin params Path=" + skinPluginPath + " pkg=" + skinPluginPkg + " suffix" + suffix);
         if (skinPluginPath.equals(SkinSPHelper.LOCAL_SKIN_TAG)) {
             if (TextUtils.isEmpty(suffix)) {
                 changeSkinMode(SkinMode.MODE_DEFAULT);
@@ -252,6 +253,7 @@ public class MSkinLoader {
         Resources mResources = new Resources(assetManager, superRes.getDisplayMetrics(), superRes.getConfiguration());
         mResourceManager = new ResourceManager(mContext, mResources, skinPluginPkg, mSuffix);
         changeSkinMode(SkinMode.MODE_PLUGIN);
+        Log.d(TAG, "loadPlugin end");
     }
 
     /**

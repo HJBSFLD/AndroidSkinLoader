@@ -19,6 +19,7 @@ public class DynamicSkinViewManager<T extends SkinHold<V>, V> {
         if (skinViews == null) {
             skinViews = new ArrayList<>();
         }
+        skinHold.apply();
         skinViews.add(skinHold);
     }
 

@@ -65,6 +65,15 @@ public class MSkinLoader {
         isInit = true;
     }
 
+    public void clear() {
+        mResourceManager = null;
+        mSp = null;
+        mSuffix = null;
+        skinObservers.clear();
+        skinObservers = null;
+        isInit = false;
+    }
+
     public void bind(ISkinChangeListener listener) {
         if (skinObservers == null) {
             skinObservers = new ArrayList<>();
